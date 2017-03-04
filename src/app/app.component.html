@@ -1,3 +1,17 @@
-<h1>
-  {{title}}
-</h1>
+<div id="main">
+  <dc-fixed-header-table [value]="people">
+    <dc-column field="name" header="Name" [style]="{'width': '20%'}">
+      <template let-person="rowData" let-column>
+        <strong>{{person[column.field]}}</strong>
+      </template>
+    </dc-column>
+    <dc-column field="gender" header="Gender" [style]="{'width': '10%'}"></dc-column>
+    <dc-column field="company" header="Company" [style]="{'width': '10%'}"></dc-column>
+    <dc-column field="email" header="Mail" [style]="{'width': '30%'}"></dc-column>
+    <dc-column field="date" header="Born date" [style]="{'width': '20%'}">
+      <template let-person="rowData" let-column>
+        {{ person[column.field] | date }}
+      </template>
+    </dc-column>
+  </dc-fixed-header-table>
+</div>

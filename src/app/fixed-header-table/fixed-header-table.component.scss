@@ -1,0 +1,52 @@
+@mixin transform($arguments...) {
+  -webkit-transform: $arguments;
+  -moz-transform: $arguments;
+  -o-transform: $arguments;
+  -ms-transform: $arguments;
+  transform: $arguments;
+}
+
+@mixin touch-overflow-scrolling() {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+}
+
+@mixin renderGPU(){
+  @include transform(translateZ(0));
+}
+
+@mixin user-select($argument: none) {
+  -webkit-user-select: $argument;
+  -moz-user-select: $argument;
+  -ms-user-select: $argument;
+  user-select: $argument;
+}
+
+@mixin color-select($color: white, $background: black) {
+  ::-moz-selection { color: $color; background-color: $background; }
+  ::selection { color: $color; background-color: $background; }
+}
+div {
+  div {
+    height: calc(100vh - 50px);
+    overflow: hidden;
+  }
+
+  .scroll-area {
+    @include touch-overflow-scrolling();
+    @include renderGPU();
+    height: calc(100% - 50px);
+
+    table {
+      border-top: 0;
+      @include user-select(initial);
+
+      tr:first-of-type {
+        td {
+          border-top: 0;
+        }
+      }
+    }
+  }
+}

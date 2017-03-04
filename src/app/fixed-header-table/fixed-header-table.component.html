@@ -1,0 +1,29 @@
+<div class="h-100">
+  <div>
+    <table class="table table-bordered mb-0">
+      <thead class="thead-inverse">
+        <tr>
+          <th *ngFor="let column of columns" [ngStyle]="column.style">
+            {{column.header}}
+          </th>
+        </tr>
+      </thead>
+    </table>
+    <div class="scroll-area">
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <tr *ngFor="let val of value">
+            <td *ngFor="let column of columns" [ngStyle]="column.style">
+              <ng-container *ngIf="!column.template">
+                {{val[column.field]}}
+              </ng-container>
+              <ng-container *ngIf="column.template">
+                <template [ngTemplateOutlet]="column.template" [ngOutletContext]="{ rowData: val, $implicit: column }"></template>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
